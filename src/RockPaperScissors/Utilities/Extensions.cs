@@ -18,6 +18,7 @@ namespace RockPaperScissors.Utilities
             {
                 Mode.TwoHuman => $"[{(int)mode}] Two human players",
                 Mode.AgainstComputer => $"[{(int)mode}] Against a computer player",
+                Mode.AgainstComputerRandom => $"[{(int)mode}] Against a computer random selector player",
                 _ => "Unrecognized mode",
             };
         }

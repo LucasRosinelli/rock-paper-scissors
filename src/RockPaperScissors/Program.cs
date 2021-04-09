@@ -130,6 +130,7 @@ namespace RockPaperScissors
             {
                 Mode.TwoHuman => CreateHumanPlayer("2"),
                 Mode.AgainstComputer => new ComputerPlayer(),
+                Mode.AgainstComputerRandom => new ComputerRandomSelectorPlayer(),
                 _ => throw new NotImplementedException($"Unrecognized mode selected: {mode}"),
             };
         }
