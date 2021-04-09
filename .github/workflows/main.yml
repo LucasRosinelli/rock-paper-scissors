@@ -19,18 +19,4 @@ jobs:
       run: dotnet build -c Release --no-restore --verbosity normal
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Quality
-      uses: Secbyte/dotnet-sonarscanner@v2.3
-      with:
-        buildCommand: dotnet build .
-        projectKey: LucasRosinelli_rock-paper-scissors
-        projectName: Rock Paper Scissors
-        sonarOrganisation: lucasrosinelli
-        sonarHostname: https://sonarcloud.io
-        beginArguments: >
-          /d:sonar.verbose="true"
-          /d:sonar.cs.opencover.reportsPaths='"/coverage.xml"'
-          /d:sonar.coverage.exclusions='"tests/**","**/*.cs","**/*.md"'
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
