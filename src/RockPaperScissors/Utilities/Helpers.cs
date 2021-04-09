@@ -170,9 +170,10 @@ namespace RockPaperScissors.Utilities
         {
             var optionBeatingMapper = new Dictionary<Option, HashSet<Option>>
             {
-                { Option.Rock, new() { Option.Scissors, } },
+                { Option.Rock, new() { Option.Scissors, Option.Flamethrower, } },
                 { Option.Paper, new() { Option.Rock, } },
-                { Option.Scissors, new() { Option.Paper, } },
+                { Option.Scissors, new() { Option.Paper, Option.Flamethrower, } },
+                { Option.Flamethrower, new() { Option.Paper, } },
             };
 
             return optionBeatingMapper;

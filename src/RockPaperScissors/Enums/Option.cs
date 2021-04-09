@@ -19,5 +19,10 @@
         /// Scissors.
         /// </summary>
         Scissors = 3,
+
+        /// <summary>
+        /// Flamethrower.
+        /// </summary>
+        Flamethrower = 4,
     }
 }
