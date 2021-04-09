@@ -16,7 +16,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPaperScissors", "src\Ro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C7938028-0D8C-46BC-8C93-7A07858FF54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors.UnitTests", "tests\RockPaperScissors.UnitTests\RockPaperScissors.UnitTests.csproj", "{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPaperScissors.UnitTests", "tests\RockPaperScissors.UnitTests\RockPaperScissors.UnitTests.csproj", "{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{673C4026-867D-48E5-9137-FFF6335C149B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main.yml = .github\workflows\main.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1} = {BCD472B9-61E9-4925-AD37-3E92D6422445}
 		{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C} = {C7938028-0D8C-46BC-8C93-7A07858FF54A}
+		{673C4026-867D-48E5-9137-FFF6335C149B} = {77EBF0C0-B539-4343-9BA2-62782087CB03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05B1831B-12B5-4279-8C1D-AA38270B797A}
