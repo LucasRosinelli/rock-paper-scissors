@@ -12,7 +12,21 @@ namespace RockPaperScissors.Players
         /// <summary>
         /// The history of <see cref="Option"/> selection.
         /// </summary>
-        protected readonly List<Option> _selectionHistory = new();
+        private readonly List<Option> _selectionHistory = new List<Option>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BasePlayer"/> class.
+        /// </summary>
+        /// <param name="name">The player name.</param>
+        protected BasePlayer(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name.Trim();
+        }
 
         /// <inheritdoc/>
         public string Name { get; }
@@ -28,20 +42,6 @@ namespace RockPaperScissors.Players
 
         /// <inheritdoc/>
         public Option? LastSelection { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BasePlayer"/> class.
-        /// </summary>
-        /// <param name="name">The player name.</param>
-        protected BasePlayer(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            Name = name.Trim();
-        }
 
         /// <inheritdoc/>
         public abstract Option Select();

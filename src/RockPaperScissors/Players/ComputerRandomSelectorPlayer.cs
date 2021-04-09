@@ -22,7 +22,7 @@ namespace RockPaperScissors.Players
         public ComputerRandomSelectorPlayer()
             : base(DefaultPlayerName)
         {
-            _rnd = new();
+            _rnd = new Random();
         }
 
         /// <summary>

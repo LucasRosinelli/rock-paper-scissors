@@ -66,7 +66,7 @@ namespace RockPaperScissors.Players
         /// <returns>The entered text.</returns>
         private string ReadLineHidden()
         {
-            StringBuilder selectionFromUser = new();
+            var selectionFromUser = new StringBuilder();
             _consoleWrapper.PrintIndentedLine("# Select your option:");
             IEnumerable<string> optionDescriptions = Helpers.OptionBeatingMapper.Select(o => o.Key.Describe());
             foreach (var optionDescription in optionDescriptions)

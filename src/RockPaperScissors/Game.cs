@@ -38,6 +38,20 @@ namespace RockPaperScissors
         private (IPlayer Player, int Wins) _player2;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Game"/> class.
+        /// </summary>
+        /// <param name="consoleWrapper">The <see cref="IConsoleWrapper"/>.</param>
+        /// <param name="player1">The <see cref="IPlayer"/> 1.</param>
+        /// <param name="player2">The <see cref="IPlayer"/> 2.</param>
+        private Game(IConsoleWrapper consoleWrapper, IPlayer player1, IPlayer player2)
+        {
+            _roundWinner = new List<IPlayer>();
+            _consoleWrapper = consoleWrapper;
+            _player1 = new (player1, 0);
+            _player2 = new (player2, 0);
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Game"/>.
         /// </summary>
         /// <param name="consoleWrapper">The <see cref="IConsoleWrapper"/>.</param>
@@ -67,20 +81,6 @@ namespace RockPaperScissors
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Game"/> class.
-        /// </summary>
-        /// <param name="consoleWrapper">The <see cref="IConsoleWrapper"/>.</param>
-        /// <param name="player1">The <see cref="IPlayer"/> 1.</param>
-        /// <param name="player2">The <see cref="IPlayer"/> 2.</param>
-        private Game(IConsoleWrapper consoleWrapper, IPlayer player1, IPlayer player2)
-        {
-            _roundWinner = new();
-            _consoleWrapper = consoleWrapper;
-            _player1 = new(player1, 0);
-            _player2 = new(player2, 0);
-        }
-
-        /// <summary>
         /// Starts the <see cref="Game"/>.
         /// </summary>
         public void Start()
@@ -88,7 +88,8 @@ namespace RockPaperScissors
             do
             {
                 PlayRound();
-            } while (_player1.Wins < RoundsWinsLimit && _player2.Wins < RoundsWinsLimit);
+            }
+            while (_player1.Wins < RoundsWinsLimit && _player2.Wins < RoundsWinsLimit);
 
             PrintGameWinner();
         }
@@ -165,7 +166,7 @@ namespace RockPaperScissors
         /// <summary>
         /// Prints the round winner.
         /// </summary>
-        /// <param name="winner"></param>
+        /// <param name="winner">The <see cref="IPlayer"/>.</param>
         private void PrintRoundWinner(IPlayer? winner)
         {
             if (winner is null)

@@ -5,12 +5,12 @@ namespace RockPaperScissors.UnitTests.Players
 {
     public abstract class PlayerBaseTests
     {
-        protected IPlayer Player { get; init; }
-
         protected PlayerBaseTests(IPlayer player)
         {
             Player = player;
         }
+
+        protected IPlayer Player { get; init; }
 
         [Fact]
         public void Constructor_ShouldKeepBaseClassDefinitions()

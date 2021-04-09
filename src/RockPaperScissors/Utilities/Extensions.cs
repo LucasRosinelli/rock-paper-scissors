@@ -29,6 +29,35 @@ namespace RockPaperScissors.Utilities
         private static readonly ConsoleColor ErrorForegroundColor = ConsoleColor.Red;
 
         /// <summary>
+        /// Describes the <see cref="Mode"/>.
+        /// </summary>
+        /// <param name="mode">The <see cref="Mode"/> to describe.</param>
+        /// <returns>The <see cref="Mode"/> description.</returns>
+        public static string Describe(this Mode mode)
+        {
+            return mode switch
+            {
+                Mode.TwoHuman => $"[{(int)mode}] Two human players",
+                Mode.AgainstComputer => $"[{(int)mode}] Against a computer player",
+                Mode.AgainstComputerRandom => $"[{(int)mode}] Against a computer random selector player",
+                _ => "Unrecognized mode",
+            };
+        }
+
+        /// <summary>
+        /// Describes the <see cref="Option"/>.
+        /// </summary>
+        /// <param name="option">The <see cref="Option"/> to describe.</param>
+        /// <returns>The <see cref="Option"/> description.</returns>
+        public static string Describe(this Option option)
+        {
+            return option switch
+            {
+                _ => $"[{(int)option}] {option}",
+            };
+        }
+
+        /// <summary>
         /// Prints a line in the console with indentation.
         /// </summary>
         /// <param name="consoleWrapper">The <see cref="IConsoleWrapper"/>.</param>
@@ -144,35 +173,6 @@ namespace RockPaperScissors.Utilities
         internal static void PrintIndentedLineError(this IConsoleWrapper consoleWrapper, string content, int indent = 7)
         {
             consoleWrapper.PrintIndentedLineColored(content, ErrorForegroundColor, indent);
-        }
-
-        /// <summary>
-        /// Describes the <see cref="Mode"/>.
-        /// </summary>
-        /// <param name="mode">The <see cref="Mode"/> to describe.</param>
-        /// <returns>The <see cref="Mode"/> description.</returns>
-        public static string Describe(this Mode mode)
-        {
-            return mode switch
-            {
-                Mode.TwoHuman => $"[{(int)mode}] Two human players",
-                Mode.AgainstComputer => $"[{(int)mode}] Against a computer player",
-                Mode.AgainstComputerRandom => $"[{(int)mode}] Against a computer random selector player",
-                _ => "Unrecognized mode",
-            };
-        }
-
-        /// <summary>
-        /// Describes the <see cref="Option"/>.
-        /// </summary>
-        /// <param name="option">The <see cref="Option"/> to describe.</param>
-        /// <returns>The <see cref="Option"/> description.</returns>
-        public static string Describe(this Option option)
-        {
-            return option switch
-            {
-                _ => $"[{(int)option}] {option}",
-            };
         }
     }
 }

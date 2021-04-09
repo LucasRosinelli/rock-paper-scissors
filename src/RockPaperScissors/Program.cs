@@ -8,9 +8,13 @@ using RockPaperScissors.Utilities;
 
 namespace RockPaperScissors
 {
+#pragma warning disable S1118 // Utility classes should not have public constructors
     public class Program
+#pragma warning restore S1118 // Utility classes should not have public constructors
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private static IConsoleWrapper _consoleWrapper;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         public static void Main(string[] args)
         {
@@ -77,7 +81,6 @@ namespace RockPaperScissors
             _consoleWrapper.WriteLine("   | When the same option is selected by both players, the round is restarted. |");
             _consoleWrapper.WriteLine("   \\---------------------------------------------------------------------------/");
             _consoleWrapper.WriteLine();
-
         }
 
         /// <summary>

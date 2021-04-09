@@ -28,7 +28,8 @@ namespace RockPaperScissors.UnitTests.Enums
             // Act
 
             // Assert
-            Assert.Collection(elements,
+            Assert.Collection(
+                elements,
                 e => Assert.Equal((int)Mode.TwoHuman, e),
                 e => Assert.Equal((int)Mode.AgainstComputer, e),
                 e => Assert.Equal((int)Mode.AgainstComputerRandom, e));
@@ -54,7 +55,8 @@ namespace RockPaperScissors.UnitTests.Enums
             // Act
 
             // Assert
-            Assert.Collection(elements,
+            Assert.Collection(
+                elements,
                 e => Assert.Equal((int)Option.Rock, e),
                 e => Assert.Equal((int)Option.Paper, e),
                 e => Assert.Equal((int)Option.Scissors, e),

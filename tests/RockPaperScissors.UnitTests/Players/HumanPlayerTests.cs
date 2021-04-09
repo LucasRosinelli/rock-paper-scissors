@@ -14,15 +14,16 @@ namespace RockPaperScissors.UnitTests.Players
         public HumanPlayerTests()
             : base(new HumanPlayer(new Mock<IConsoleWrapper>().Object, "fake"))
         {
-            _mockConsoleWrapper = new();
+            _mockConsoleWrapper = new Mock<IConsoleWrapper>();
         }
 
+        [Fact]
         public void Constructor_WithNullConsoleWrapper_ThrowsArgumentNullException()
         {
             // Arrange
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentNullException>(() => new HumanPlayer(null, "fake"));
+            var exception = Assert.Throws<ArgumentNullException>(() => new HumanPlayer(null!, "fake"));
             Assert.Contains("Parameter 'consoleWrapper'", exception.Message);
         }
 

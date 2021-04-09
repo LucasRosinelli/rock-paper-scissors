@@ -7,18 +7,18 @@ namespace RockPaperScissors.UnitTests.Players
 {
     public class ComputerPlayerTests : PlayerBaseTests
     {
+        private static readonly Dictionary<Option, HashSet<Option>> ExpectedSelection = new Dictionary<Option, HashSet<Option>>()
+        {
+            { Option.Rock, new HashSet<Option>() { Option.Paper, } },
+            { Option.Paper, new HashSet<Option>() { Option.Scissors, Option.Flamethrower, } },
+            { Option.Scissors, new HashSet<Option>() { Option.Rock, } },
+            { Option.Flamethrower, new HashSet<Option>() { Option.Rock, Option.Scissors, } },
+        };
+
         public ComputerPlayerTests()
             : base(new ComputerPlayer())
         {
         }
-
-        private static readonly Dictionary<Option, HashSet<Option>> ExpectedSelection = new()
-        {
-            { Option.Rock, new() { Option.Paper, } },
-            { Option.Paper, new() { Option.Scissors, Option.Flamethrower, } },
-            { Option.Scissors, new() { Option.Rock, } },
-            { Option.Flamethrower, new() { Option.Rock, Option.Scissors, } },
-        };
 
         [Fact]
         public void Constructor_ShouldInstantiateWithDefaultName()

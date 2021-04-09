@@ -10,6 +10,7 @@ namespace RockPaperScissors.Utilities
             {
                 return Console.ForegroundColor;
             }
+
             set
             {
                 Console.ForegroundColor = value;
