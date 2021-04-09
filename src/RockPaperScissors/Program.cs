@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using RockPaperScissors.Enums;
 using RockPaperScissors.Players;
 using RockPaperScissors.Utilities;
@@ -9,8 +10,16 @@ namespace RockPaperScissors
 {
     public class Program
     {
+        private static IConsoleWrapper _consoleWrapper;
+
         public static void Main(string[] args)
         {
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            _consoleWrapper = serviceProvider.GetRequiredService<IConsoleWrapper>();
+
             try
             {
                 PrintHeader();
@@ -20,17 +29,22 @@ namespace RockPaperScissors
                 Mode mode = ReadMode();
 
                 var players = CreatePlayers(mode);
-                var game = Game.Create(players.Player1, players.Player2);
+                var game = Game.Create(_consoleWrapper, players.Player1, players.Player2);
                 game.Start();
 
-                Helpers.PrintIndented("Press any key to exit");
-                Console.ReadLine();
+                _consoleWrapper.PrintIndented("Press any key to exit");
+                _consoleWrapper.ReadLine();
             }
             catch (Exception exc)
             {
-                Helpers.PrintIndentedError("An error occurred during the application execution. Sorry!");
-                Helpers.PrintIndentedError(exc.Message);
+                _consoleWrapper.PrintIndentedError("An error occurred during the application execution. Sorry!");
+                _consoleWrapper.PrintIndentedError(exc.Message);
             }
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<IConsoleWrapper, ConsoleWrapper>();
         }
 
         /// <summary>
@@ -38,31 +52,31 @@ namespace RockPaperScissors
         /// </summary>
         private static void PrintHeader()
         {
-            Console.WriteLine();
-            Console.WriteLine("  *******************************************************************************************************************");
-            Console.WriteLine("  *                                                                                                                 *");
-            Console.WriteLine("  *                                                ROCK PAPER SCISSORS                                              *");
-            Console.WriteLine("  *                                                                                                                 *");
-            Console.WriteLine("  *******************************************************************************************************************");
-            Console.WriteLine("  *  Lucas Rosinelli https://lucasrosinelli.com/                                                                    *");
-            Console.WriteLine("  *******************************************************************************************************************");
-            Console.WriteLine();
+            _consoleWrapper.WriteLine();
+            _consoleWrapper.WriteLine("  *******************************************************************************************************************");
+            _consoleWrapper.WriteLine("  *                                                                                                                 *");
+            _consoleWrapper.WriteLine("  *                                                ROCK PAPER SCISSORS                                              *");
+            _consoleWrapper.WriteLine("  *                                                                                                                 *");
+            _consoleWrapper.WriteLine("  *******************************************************************************************************************");
+            _consoleWrapper.WriteLine("  *  Lucas Rosinelli https://lucasrosinelli.com/                                                                    *");
+            _consoleWrapper.WriteLine("  *******************************************************************************************************************");
+            _consoleWrapper.WriteLine();
         }
 
         private static void PrintRules()
         {
-            Console.WriteLine();
-            Console.WriteLine("   /---------------------------------------------------------------------------\\");
-            Console.WriteLine("   | RULES                                                                     |");
-            Console.WriteLine("   |---------------------------------------------------------------------------|");
-            Console.WriteLine("   | The first player to win 3 rounds wins.                                    |");
-            Console.WriteLine("   | During each round, players select one of the three following options:     |");
-            Console.WriteLine("   |   - Rock, which beats scissors                                            |");
-            Console.WriteLine("   |   - Paper, which beats rock                                               |");
-            Console.WriteLine("   |   - Scissors, which beats paper                                           !");
-            Console.WriteLine("   | When the same option is selected by both players, the round is restarted. |");
-            Console.WriteLine("   \\---------------------------------------------------------------------------/");
-            Console.WriteLine();
+            _consoleWrapper.WriteLine();
+            _consoleWrapper.WriteLine("   /---------------------------------------------------------------------------\\");
+            _consoleWrapper.WriteLine("   | RULES                                                                     |");
+            _consoleWrapper.WriteLine("   |---------------------------------------------------------------------------|");
+            _consoleWrapper.WriteLine("   | The first player to win 3 rounds wins.                                    |");
+            _consoleWrapper.WriteLine("   | During each round, players select one of the three following options:     |");
+            _consoleWrapper.WriteLine("   |   - Rock, which beats scissors                                            |");
+            _consoleWrapper.WriteLine("   |   - Paper, which beats rock                                               |");
+            _consoleWrapper.WriteLine("   |   - Scissors, which beats paper                                           !");
+            _consoleWrapper.WriteLine("   | When the same option is selected by both players, the round is restarted. |");
+            _consoleWrapper.WriteLine("   \\---------------------------------------------------------------------------/");
+            _consoleWrapper.WriteLine();
 
         }
 
@@ -74,23 +88,23 @@ namespace RockPaperScissors
         {
             while (true)
             {
-                Console.WriteLine();
-                Helpers.PrintIndentedLine("Select the mode you want to play:");
+                _consoleWrapper.WriteLine();
+                _consoleWrapper.PrintIndentedLine("Select the mode you want to play:");
                 IEnumerable<string> modeDescriptions = Enum.GetValues<Mode>().Select(o => o.Describe());
                 foreach (var modeDescription in modeDescriptions)
                 {
-                    Helpers.PrintIndentedLine($">> {modeDescription}");
+                    _consoleWrapper.PrintIndentedLine($">> {modeDescription}");
                 }
 
-                Helpers.PrintIndented(string.Empty);
-                string? modeFromUser = Console.ReadLine()?.Trim();
+                _consoleWrapper.PrintIndented(string.Empty);
+                string? modeFromUser = _consoleWrapper.ReadLine()?.Trim();
 
                 if (Enum.TryParse<Mode>(modeFromUser, true, out var mode) && Enum.IsDefined(mode))
                 {
                     return mode;
                 }
 
-                Helpers.PrintIndentedLineError($"{modeFromUser} is an invalid mode. Please, try again.");
+                _consoleWrapper.PrintIndentedLineError($"{modeFromUser} is an invalid mode. Please, try again.");
             }
         }
 
@@ -142,18 +156,18 @@ namespace RockPaperScissors
         /// <returns>The <see cref="HumanPlayer"/>.</returns>
         private static HumanPlayer CreateHumanPlayer(string playerIdentifier)
         {
-            Console.WriteLine();
+            _consoleWrapper.WriteLine();
             var message = $"Player {playerIdentifier}, enter your name: ";
-            Helpers.PrintIndented(message);
-            string? name = Console.ReadLine()?.Trim();
+            _consoleWrapper.PrintIndented(message);
+            string? name = _consoleWrapper.ReadLine()?.Trim();
             while (string.IsNullOrEmpty(name))
             {
-                Helpers.PrintIndentedLineError($"Your name cannot be blank. Please, try again.");
-                Helpers.PrintIndented(message);
-                name = Console.ReadLine()?.Trim();
+                _consoleWrapper.PrintIndentedLineError($"Your name cannot be blank. Please, try again.");
+                _consoleWrapper.PrintIndented(message);
+                name = _consoleWrapper.ReadLine()?.Trim();
             }
 
-            return new HumanPlayer(name);
+            return new HumanPlayer(_consoleWrapper, name);
         }
     }
 }

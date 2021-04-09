@@ -12,7 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BCD472B9-61E9-4925-AD37-3E92D6422445}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors", "src\RockPaperScissors\RockPaperScissors.csproj", "{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPaperScissors", "src\RockPaperScissors\RockPaperScissors.csproj", "{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C7938028-0D8C-46BC-8C93-7A07858FF54A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors.UnitTests", "tests\RockPaperScissors.UnitTests\RockPaperScissors.UnitTests.csproj", "{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,12 +28,17 @@ Global
 		{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3DD7BA19-397F-4C16-9D0B-ABCE4E550CC1} = {BCD472B9-61E9-4925-AD37-3E92D6422445}
+		{CDADE692-8FF1-4BF5-BC08-1EAB9D0BE12C} = {C7938028-0D8C-46BC-8C93-7A07858FF54A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05B1831B-12B5-4279-8C1D-AA38270B797A}

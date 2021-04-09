@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RockPaperScissors.Enums;
 
 namespace RockPaperScissors.Players
@@ -34,7 +35,12 @@ namespace RockPaperScissors.Players
         /// <param name="name">The player name.</param>
         protected BasePlayer(string name)
         {
-            Name = name;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name.Trim();
         }
 
         /// <inheritdoc/>

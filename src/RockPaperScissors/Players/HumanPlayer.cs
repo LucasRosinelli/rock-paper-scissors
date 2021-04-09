@@ -13,12 +13,19 @@ namespace RockPaperScissors.Players
     public sealed class HumanPlayer : BasePlayer
     {
         /// <summary>
+        /// The <see cref="IConsoleWrapper"/>.
+        /// </summary>
+        private readonly IConsoleWrapper _consoleWrapper;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HumanPlayer"/> class.
         /// </summary>
+        /// <param name="consoleWrapper">The <see cref="IConsoleWrapper"/>.</param>
         /// <param name="name">The player name.</param>
-        public HumanPlayer(string name)
+        public HumanPlayer(IConsoleWrapper consoleWrapper, string name)
             : base(name)
         {
+            _consoleWrapper = consoleWrapper ?? throw new ArgumentNullException(nameof(consoleWrapper));
         }
 
         /// <summary>
@@ -32,12 +39,12 @@ namespace RockPaperScissors.Players
         {
             while (true)
             {
-                Helpers.PrintIndented("# ");
-                Helpers.PrintIndentedSuccess(Name, 0);
-                Helpers.PrintIndentedLine(", type the number or the complete word", 0);
-                Helpers.PrintIndentedLineWarning("=> Don't worry, your selection will not be displayed =)");
+                _consoleWrapper.PrintIndented("# ");
+                _consoleWrapper.PrintIndentedSuccess(Name, 0);
+                _consoleWrapper.PrintIndentedLine(", type the number or the complete word", 0);
+                _consoleWrapper.PrintIndentedLineWarning("=> Don't worry, your selection will not be displayed =)");
                 string selectionFromUser = ReadLineHidden();
-                Console.WriteLine();
+                _consoleWrapper.WriteLine();
 
                 if (Enum.TryParse<Option>(selectionFromUser, true, out var option) && Enum.IsDefined(option))
                 {
@@ -46,7 +53,7 @@ namespace RockPaperScissors.Players
                     return option;
                 }
 
-                Helpers.PrintIndentedLineError($"{selectionFromUser} is an invalid option. Please, try again.");
+                _consoleWrapper.PrintIndentedLineError($"{selectionFromUser} is an invalid option. Please, try again.");
             }
         }
 
@@ -54,24 +61,24 @@ namespace RockPaperScissors.Players
         /// Reads the <see cref="Option"/> hiding the entered text.
         /// </summary>
         /// <remarks>
-        /// It is very useful when using the same device to play agains another <see cref="HumanPlayer"/>.
+        /// It is very useful when using the same device to play against another <see cref="HumanPlayer"/>.
         /// </remarks>
         /// <returns>The entered text.</returns>
         private string ReadLineHidden()
         {
             StringBuilder selectionFromUser = new();
-            Helpers.PrintIndentedLine("# Select your option:");
+            _consoleWrapper.PrintIndentedLine("# Select your option:");
             IEnumerable<string> optionDescriptions = Helpers.OptionBeatingMapper.Select(o => o.Key.Describe());
             foreach (var optionDescription in optionDescriptions)
             {
-                Helpers.PrintIndentedLine($"# >> {optionDescription}");
+                _consoleWrapper.PrintIndentedLine($"# >> {optionDescription}");
             }
 
-            Helpers.PrintIndented(string.Empty);
+            _consoleWrapper.PrintIndented(string.Empty);
             var newLine = '\r';
             while (true)
             {
-                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
+                ConsoleKeyInfo consoleKeyInfo = _consoleWrapper.ReadKey(true);
                 char selectionCharacter = consoleKeyInfo.KeyChar;
 
                 if (selectionCharacter == newLine)
